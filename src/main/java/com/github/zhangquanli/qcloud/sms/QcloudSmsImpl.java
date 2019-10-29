@@ -125,14 +125,14 @@ public class QcloudSmsImpl implements QcloudSms {
                 .url(url)
                 .post(requestBody)
                 .build();
-        log.info("【腾讯云短信服务】>>>请求>>>{}>>>{}", url, json);
+        log.info("【腾讯云】>>>【短信】>>>请求数据>>>{}>>>{}", url, json);
         try (Response response = okHttpClient.newCall(request).execute();) {
             ResponseBody responseBody = response.body();
             if (responseBody == null) {
                 throw new RuntimeException("【腾讯云短信服务】响应数据为空");
             }
             String responseJson = responseBody.string();
-            log.info("【腾讯云短信服务】>>>响应>>>{}", responseJson);
+            log.info("【腾讯云】>>>【短信】>>>响应数据>>>{}", responseJson);
             return responseJson;
         } catch (IOException e) {
             e.printStackTrace();
