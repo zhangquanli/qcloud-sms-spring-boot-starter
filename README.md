@@ -12,7 +12,7 @@
     ```
 2. 在 `application.properties` 或 `application.yml` 文件中，进行配置
     ```properties
-    qcloud..app-id=appId
+    qcloud.sms.app-id=appId
     qcloud.sms.app-key=appKey
     ```
     ```yaml
