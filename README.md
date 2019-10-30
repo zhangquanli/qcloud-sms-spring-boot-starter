@@ -7,7 +7,7 @@
     <dependency>
         <groupId>com.github.zhangquanli</groupId>
         <artifactId>qcloud-sms-spring-boot-starter</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </dependency>
     ```
 2. 在 `application.properties` 或 `application.yml` 文件中，进行配置
