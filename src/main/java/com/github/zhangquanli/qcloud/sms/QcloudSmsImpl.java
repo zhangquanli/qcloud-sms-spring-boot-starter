@@ -113,29 +113,39 @@ public class QcloudSmsImpl implements QcloudSms {
     }
 
     private String post(String url, Map<String, Object> body) {
-        String json;
+        // 构建请求数据
+        Request request;
         try {
-            json = objectMapper.writeValueAsString(body);
+            String json = objectMapper.writeValueAsString(body);
+            RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), json);
+            request = new Request.Builder().url(url).post(requestBody).build();
+            if (log.isDebugEnabled()) {
+                log.debug("【腾讯云】>>>【短信】>>>请求地址：{}>>>请求数据：{}", url, json);
+            }
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            log.error("【腾讯云】>>>【短信】>>>请求数据异常", e);
             throw new RuntimeException(e.getMessage());
         }
-        RequestBody requestBody = RequestBody.create(MediaType.get("application/json;charset=utf-8"), json);
-        Request request = new Request.Builder()
-                .url(url)
-                .post(requestBody)
-                .build();
-        log.info("【腾讯云】>>>【短信】>>>请求数据>>>{}>>>{}", url, json);
-        try (Response response = okHttpClient.newCall(request).execute();) {
+        // 获取响应数据
+        try (Response response = okHttpClient.newCall(request).execute()) {
+            if (!response.isSuccessful()) {
+                RuntimeException e = new RuntimeException("【腾讯云】>>>【短信】>>>响应状态异常");
+                log.error("【腾讯云】>>>【短信】>>>响应状态异常", e);
+                throw e;
+            }
             ResponseBody responseBody = response.body();
             if (responseBody == null) {
-                throw new RuntimeException("【腾讯云短信服务】响应数据为空");
+                RuntimeException e = new RuntimeException("【腾讯云】>>>【短信】>>>响应数据为空");
+                log.error("【腾讯云】>>>【短信】>>>响应数据为空", e);
+                throw e;
             }
             String responseJson = responseBody.string();
-            log.info("【腾讯云】>>>【短信】>>>响应数据>>>{}", responseJson);
+            if (log.isDebugEnabled()) {
+                log.debug("【腾讯云】>>>【短信】>>>响应数据：{}", responseJson);
+            }
             return responseJson;
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("【腾讯云】>>>【短信】>>>网络请求异常", e);
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -144,7 +154,7 @@ public class QcloudSmsImpl implements QcloudSms {
         try {
             return objectMapper.readValue(json, targetClass);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            log.error("【腾讯云】>>>【短信】>>>响应数据异常", e);
             throw new RuntimeException(e.getMessage());
         }
     }
