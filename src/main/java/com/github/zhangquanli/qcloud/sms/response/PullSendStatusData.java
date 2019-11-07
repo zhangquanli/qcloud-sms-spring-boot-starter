@@ -1,20 +1,12 @@
 package com.github.zhangquanli.qcloud.sms.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * PullSendStatusData
  *
  * @author zhangquanli
  */
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class PullSendStatusData {
 
     /**
@@ -32,4 +24,28 @@ public class PullSendStatusData {
      */
     @JsonProperty("success")
     private Integer success;
+
+    public Integer getBillNumber() {
+        return billNumber;
+    }
+
+    public void setBillNumber(Integer billNumber) {
+        this.billNumber = billNumber;
+    }
+
+    public Integer getRequest() {
+        return request;
+    }
+
+    public void setRequest(Integer request) {
+        this.request = request;
+    }
+
+    public Integer getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Integer success) {
+        this.success = success;
+    }
 }

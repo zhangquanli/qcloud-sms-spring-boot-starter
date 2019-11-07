@@ -1,10 +1,7 @@
 package com.github.zhangquanli.qcloud.sms.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.github.zhangquanli.qcloud.sms.http.AbstractResponse;
 
 import java.util.List;
 
@@ -13,11 +10,7 @@ import java.util.List;
  *
  * @author zhangquanli
  */
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class GetSmsPackagesResponse {
+public class GetSmsPackagesResponse extends AbstractResponse {
 
     /**
      * 描述：套餐包个数
@@ -29,4 +22,20 @@ public class GetSmsPackagesResponse {
      */
     @JsonProperty("data")
     private List<GetSmsPackagesData> data;
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+
+    public List<GetSmsPackagesData> getData() {
+        return data;
+    }
+
+    public void setData(List<GetSmsPackagesData> data) {
+        this.data = data;
+    }
 }

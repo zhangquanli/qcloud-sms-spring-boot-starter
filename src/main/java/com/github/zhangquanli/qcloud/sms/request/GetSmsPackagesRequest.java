@@ -1,23 +1,14 @@
 package com.github.zhangquanli.qcloud.sms.request;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.github.zhangquanli.qcloud.sms.http.AbstractRequest;
 
 /**
  * GetSmsPackagesRequest
  *
  * @author zhangquanli
  */
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class GetSmsPackagesRequest {
+public class GetSmsPackagesRequest extends AbstractRequest {
 
     /**
      * 描述：分页拉取的偏移量
@@ -33,4 +24,44 @@ public class GetSmsPackagesRequest {
      */
     @JsonProperty("length")
     private Integer length;
+
+    private GetSmsPackagesRequest(Integer offset, Integer length) {
+        this.offset = offset;
+        this.length = length;
+    }
+
+    public Integer getOffset() {
+        return offset;
+    }
+
+    public Integer getLength() {
+        return length;
+    }
+
+    public static GetSmsPackagesRequestBuilder builder() {
+        return new GetSmsPackagesRequestBuilder();
+    }
+
+    public static class GetSmsPackagesRequestBuilder {
+
+        private Integer offset;
+        private Integer length;
+
+        private GetSmsPackagesRequestBuilder() {
+        }
+
+        public GetSmsPackagesRequestBuilder offset(Integer offset) {
+            this.offset = offset;
+            return this;
+        }
+
+        public GetSmsPackagesRequestBuilder length(Integer length) {
+            this.length = length;
+            return this;
+        }
+
+        public GetSmsPackagesRequest build() {
+            return new GetSmsPackagesRequest(offset, length);
+        }
+    }
 }

@@ -1,10 +1,7 @@
 package com.github.zhangquanli.qcloud.sms.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.github.zhangquanli.qcloud.sms.http.AbstractRequest;
 
 import java.util.List;
 
@@ -13,11 +10,7 @@ import java.util.List;
  *
  * @author zhangquanli
  */
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class SendSingleSmsRequest {
+public class SendSingleSmsRequest extends AbstractRequest {
 
     /**
      * 描述：国际电话号码
@@ -51,11 +44,102 @@ public class SendSingleSmsRequest {
      * 是否必填：否
      */
     @JsonProperty("ext")
-    private String ext = "";
+    private String ext;
     /**
      * 描述：短信码号扩展号，格式为纯数字串，其他格式无效。默认没有开通，如需开通请联系 sms helper 。
      * 是否必填：否
      */
     @JsonProperty("extend")
-    private String extend = "";
+    private String extend;
+
+    private SendSingleSmsRequest(Tel tel, String sign, Long tplId, List<String> params, String ext, String extend) {
+        this.tel = tel;
+        this.sign = sign;
+        this.tplId = tplId;
+        this.params = params;
+        this.ext = ext;
+        this.extend = extend;
+    }
+
+    public Tel getTel() {
+        return tel;
+    }
+
+    public String getSign() {
+        return sign;
+    }
+
+    public Long getTplId() {
+        return tplId;
+    }
+
+    public List<String> getParams() {
+        return params;
+    }
+
+    public String getExt() {
+        return ext;
+    }
+
+    public String getExtend() {
+        return extend;
+    }
+
+    public static SendSingleSmsRequestBuilder builder() {
+        return new SendSingleSmsRequestBuilder();
+    }
+
+    public static class SendSingleSmsRequestBuilder {
+
+        private String mobile;
+        private String nationCode;
+        private String sign;
+        private Long tplId;
+        private List<String> params;
+        private String ext;
+        private String extend;
+
+        private SendSingleSmsRequestBuilder() {
+        }
+
+        public SendSingleSmsRequestBuilder mobile(String mobile) {
+            this.mobile = mobile;
+            return this;
+        }
+
+        public SendSingleSmsRequestBuilder nationCode(String nationCode) {
+            this.nationCode = nationCode;
+            return this;
+        }
+
+        public SendSingleSmsRequestBuilder sign(String sign) {
+            this.sign = sign;
+            return this;
+        }
+
+        public SendSingleSmsRequestBuilder tplId(Long tplId) {
+            this.tplId = tplId;
+            return this;
+        }
+
+        public SendSingleSmsRequestBuilder params(List<String> params) {
+            this.params = params;
+            return this;
+        }
+
+        public SendSingleSmsRequestBuilder ext(String ext) {
+            this.ext = ext;
+            return this;
+        }
+
+        public SendSingleSmsRequestBuilder extend(String extend) {
+            this.extend = extend;
+            return this;
+        }
+
+        public SendSingleSmsRequest build() {
+            Tel tel = Tel.builder().mobile(mobile).nationCode(nationCode).build();
+            return new SendSingleSmsRequest(tel, sign, tplId, params, ext, extend);
+        }
+    }
 }

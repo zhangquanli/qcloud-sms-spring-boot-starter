@@ -1,23 +1,14 @@
 package com.github.zhangquanli.qcloud.sms.request;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.github.zhangquanli.qcloud.sms.http.AbstractRequest;
 
 /**
  * PullSendStatus
  *
  * @author zhangquanli
  */
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class PullSendStatusRequest {
+public class PullSendStatusRequest extends AbstractRequest {
 
     /**
      * 描述：开始时间，yyyymmddhh 需要拉取的起始时间，精确到小时
@@ -33,4 +24,44 @@ public class PullSendStatusRequest {
      */
     @JsonProperty("end_date")
     private Integer endDate;
+
+    private PullSendStatusRequest(Integer beginDate, Integer endDate) {
+        this.beginDate = beginDate;
+        this.endDate = endDate;
+    }
+
+    public Integer getBeginDate() {
+        return beginDate;
+    }
+
+    public Integer getEndDate() {
+        return endDate;
+    }
+
+    public static PullSendStatusRequestBuilder builder() {
+        return new PullSendStatusRequestBuilder();
+    }
+
+    public static class PullSendStatusRequestBuilder {
+
+        private Integer beginDate;
+        private Integer endDate;
+
+        private PullSendStatusRequestBuilder() {
+        }
+
+        public PullSendStatusRequestBuilder beginDate(Integer beginDate) {
+            this.beginDate = beginDate;
+            return this;
+        }
+
+        public PullSendStatusRequestBuilder endDate(Integer endDate) {
+            this.endDate = endDate;
+            return this;
+        }
+
+        public PullSendStatusRequest build() {
+            return new PullSendStatusRequest(beginDate, endDate);
+        }
+    }
 }

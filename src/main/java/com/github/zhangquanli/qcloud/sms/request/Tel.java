@@ -1,20 +1,12 @@
 package com.github.zhangquanli.qcloud.sms.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * Tel
  *
  * @author zhangquanli
  */
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class Tel {
 
     /**
@@ -31,4 +23,44 @@ public class Tel {
      */
     @JsonProperty("nationcode")
     private String nationCode;
+
+    private Tel(String mobile, String nationCode) {
+        this.mobile = mobile;
+        this.nationCode = nationCode;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public String getNationCode() {
+        return nationCode;
+    }
+
+    public static TelBuilder builder() {
+        return new TelBuilder();
+    }
+
+    public static class TelBuilder {
+
+        private String mobile;
+        private String nationCode;
+
+        private TelBuilder() {
+        }
+
+        public TelBuilder mobile(String mobile) {
+            this.mobile = mobile;
+            return this;
+        }
+
+        public TelBuilder nationCode(String nationCode) {
+            this.nationCode = nationCode;
+            return this;
+        }
+
+        public Tel build() {
+            return new Tel(mobile, nationCode);
+        }
+    }
 }

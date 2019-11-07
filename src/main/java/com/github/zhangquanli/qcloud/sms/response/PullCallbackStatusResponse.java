@@ -1,21 +1,14 @@
 package com.github.zhangquanli.qcloud.sms.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.github.zhangquanli.qcloud.sms.http.AbstractResponse;
 
 /**
  * PullCallbackStatusResponse
  *
  * @author zhangquanli
  */
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class PullCallbackStatusResponse {
+public class PullCallbackStatusResponse extends AbstractResponse {
 
     /**
      * 描述：错误码，0表示成功（计费依据），非0表示失败
@@ -37,4 +30,36 @@ public class PullCallbackStatusResponse {
      */
     @JsonProperty("data")
     private PullCallbackStatusData data;
+
+    public Integer getResult() {
+        return result;
+    }
+
+    public void setResult(Integer result) {
+        this.result = result;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public String getErrMsg() {
+        return errMsg;
+    }
+
+    public void setErrMsg(String errMsg) {
+        this.errMsg = errMsg;
+    }
+
+    public PullCallbackStatusData getData() {
+        return data;
+    }
+
+    public void setData(PullCallbackStatusData data) {
+        this.data = data;
+    }
 }

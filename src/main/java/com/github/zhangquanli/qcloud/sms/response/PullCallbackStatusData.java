@@ -1,20 +1,12 @@
 package com.github.zhangquanli.qcloud.sms.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * PullCallbackStatusData
  *
  * @author zhangquanli
  */
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class PullCallbackStatusData {
 
     /**
@@ -62,4 +54,76 @@ public class PullCallbackStatusData {
      */
     @JsonProperty("success")
     private Integer success;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getStatusFail() {
+        return statusFail;
+    }
+
+    public void setStatusFail(Integer statusFail) {
+        this.statusFail = statusFail;
+    }
+
+    public Integer getStatusFail0() {
+        return statusFail0;
+    }
+
+    public void setStatusFail0(Integer statusFail0) {
+        this.statusFail0 = statusFail0;
+    }
+
+    public Integer getStatusFail1() {
+        return statusFail1;
+    }
+
+    public void setStatusFail1(Integer statusFail1) {
+        this.statusFail1 = statusFail1;
+    }
+
+    public Integer getStatusFail2() {
+        return statusFail2;
+    }
+
+    public void setStatusFail2(Integer statusFail2) {
+        this.statusFail2 = statusFail2;
+    }
+
+    public Integer getStatusFail3() {
+        return statusFail3;
+    }
+
+    public void setStatusFail3(Integer statusFail3) {
+        this.statusFail3 = statusFail3;
+    }
+
+    public Integer getStatusFail4() {
+        return statusFail4;
+    }
+
+    public void setStatusFail4(Integer statusFail4) {
+        this.statusFail4 = statusFail4;
+    }
+
+    public Integer getStatusSuccess() {
+        return statusSuccess;
+    }
+
+    public void setStatusSuccess(Integer statusSuccess) {
+        this.statusSuccess = statusSuccess;
+    }
+
+    public Integer getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Integer success) {
+        this.success = success;
+    }
 }

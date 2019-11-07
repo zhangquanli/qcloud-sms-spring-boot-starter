@@ -1,20 +1,12 @@
 package com.github.zhangquanli.qcloud.sms.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * SendMultiSmsDetail
  *
  * @author zhangquanli
  */
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class SendMultiSmsDetail {
 
     /**
@@ -47,4 +39,52 @@ public class SendMultiSmsDetail {
      */
     @JsonProperty("sid")
     private String sid;
+
+    public Integer getResult() {
+        return result;
+    }
+
+    public void setResult(Integer result) {
+        this.result = result;
+    }
+
+    public String getErrMsg() {
+        return errMsg;
+    }
+
+    public void setErrMsg(String errMsg) {
+        this.errMsg = errMsg;
+    }
+
+    public Integer getFee() {
+        return fee;
+    }
+
+    public void setFee(Integer fee) {
+        this.fee = fee;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getNationCode() {
+        return nationCode;
+    }
+
+    public void setNationCode(String nationCode) {
+        this.nationCode = nationCode;
+    }
+
+    public String getSid() {
+        return sid;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
+    }
 }
